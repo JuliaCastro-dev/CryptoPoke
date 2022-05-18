@@ -1,0 +1,20 @@
+import { configureStore } from '@reduxjs/toolkit';
+import userSlice from './userStore';
+
+const middlewares = [];
+
+const store = configureStore({
+    reducer: {
+        user: userSlice
+    },
+   middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      immutableCheck: false,
+      serializableCheck: false,
+    }).concat(middlewares),
+  devTools: process.env.NODE_ENV === "development",
+});
+
+export default store;
+
+
