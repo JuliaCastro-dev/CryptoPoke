@@ -13,6 +13,7 @@ const defaultStylesButton = {
   height: height * 0.06,
   alignSelf: "center",
   marginTop: 10,
+  
   padding: 2
 };
 

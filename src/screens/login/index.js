@@ -1,25 +1,34 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, SafeAreaView } from "react-native";
+import { View, Text, SafeAreaView, Button } from "react-native";
 import { container, titleContainer, cryptoText, pokeText } from "./styles";
 import InputText from "../../components/input-text";
 import ButtonMain from "../../components/button-main";
 import { useDispatch } from "react-redux";
 import { getUser, setMoves } from "../../store/userStore";
 import store from "../../store";
+import _ from "lodash";
+import { useNavigation } from "@react-navigation/native";
 
 export const Login = () => {
-  const dispatch = useDispatch();
   const [pokemon, setPokemon] = useState("");
   const [password, setPassword] = useState("");
-  const { user, moves} = store.getState();
+  const _navigation = useNavigation();
+  const { user, moves } = store.getState();
 
-  useEffect(() => {
-    dispatch(setMoves(user.user?.moves))
-  },[user.user]);
+  const handleLogin = () => {
+  store.dispatch(getUser(pokemon.toLowerCase()));
+  /*    
+    _navigation.navigate("ListCrypto"); */
 
-  const handleLogin = async () => {
-   await dispatch(getUser(pokemon.toLowerCase()));
+    if(_.some(user.moves, m => m.move.name === pokemon)){
+      console.log('login')
+    }
+    else{
+      console.log(_.some(user.moves, m => m.move.name === pokemon));
+    }
   };
+
+
   return (
     <SafeAreaView style={container}>
       <View style={titleContainer}>

@@ -17,12 +17,13 @@ export const getUser = (name) => async (dispatch) => {
 const userSlice = createSlice({
   name: "UserSlice",
   initialState: {
-    user: null,
+    data: null,
     moves: [],
   },
   reducers: {
     setUser: (state, action) => {
-      state.user = action.payload;
+      state.data = action.payload;
+      state.moves = action.payload.moves;
     },
     setMoves: (state, action) => {
       state.moves = action.payload;
